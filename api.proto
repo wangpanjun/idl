@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package api;
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+  optional string query = 10001;
+  optional string header = 10002;
+  optional string cookie = 10003;
+  optional string body = 10004;
+  optional string path = 10005;
+}
+
+extend google.protobuf.MethodOptions {
+  optional string get = 20001;
+  optional string post = 20002;
+  optional string put = 20003;
+  optional string delete = 20004;
+  optional string need_login = 20010;
+}
+
+extend google.protobuf.EnumValueOptions {
+  optional int32 http_code = 30001;
+}

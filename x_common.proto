@@ -1,0 +1,204 @@
+syntax = "proto2";
+
+package x_common;
+option go_package = "x/common";
+
+import "base.proto";
+
+// 模块分类
+enum ModuleCategory {
+  Web = 1; // 前端
+  BackEnd = 2; // 后端
+  Algorithm = 3; // 算法
+  Android = 4;
+  IOS = 5;
+  Work = 6; // 职业相关
+}
+
+// feed流作品类型
+enum SearchFeedType {
+  NormalArticleType = 1; // 普通单篇
+  CollectionArticleType = 2; // 合集
+}
+
+// 付费类型
+enum ChargesType {
+  Free = 1; // 免费
+  Pay = 2; // 付费
+  Mix = 3; // 混合; 可免费试读
+}
+
+enum GenderType {
+  Male = 1; // 男
+  Female = 2; // 女
+  Unknown = 3;
+}
+
+enum OrderType {
+  TimeAsc = 1;
+  TimeDesc = 2;
+  HotAsc = 3;
+  HotDesc = 4;
+}
+
+message PageInfo {
+  required int32 offset = 1;
+  required int32 limit = 2;
+  optional bool has_more = 3;
+}
+
+message BaseUser {
+  required string uid = 1; // 用户id
+  required string name = 2;
+  required string avatar_url = 3;
+}
+
+message CollectionArticle {
+  required string title = 1;
+  required string article_id = 2;
+}
+
+message Collection {
+  required string title = 1;
+  required string introduce = 2;
+  optional string image_url = 3;
+  repeated CollectionArticle article_list = 4;
+}
+
+message SearchArticle {
+  required string title = 1;
+  required string introduce = 2;
+  optional string image_url = 3;
+}
+
+message SearchFeed {
+  required SearchFeedType feed_type = 1;
+  required BaseUser author = 2;
+  optional Collection collection = 3;
+  optional SearchArticle article = 4;
+  required ChargesType charges_type = 5; // 付费类型
+}
+
+// 搜索feed流
+message SearchReq {
+  required ModuleCategory module_category = 1;
+  optional string q = 2;
+  required PageInfo page_info = 3;
+}
+
+message SearchData {
+  repeated SearchFeed feed_list = 1;
+  required PageInfo page_info = 3;
+}
+
+message SearchResp {
+  required base.Status status = 1; // 状态
+  optional SearchData data = 2;
+}
+
+// 文章详情
+message ArticleDetail {
+  required string article_id = 1;
+  required string collection_id = 2;
+  required string content = 3;
+  required string image_url = 4;
+}
+
+// 详情页面
+message GetArticleDetailReq {
+  required string article_id = 1;
+  required string collection_id = 2;
+}
+
+message GetArticleDetailData {
+  optional Collection collection = 1;
+  optional ArticleDetail article = 2 ;
+  required BaseUser user = 3;
+}
+
+message GetArticleDetailResp {
+  required base.Status status = 1; // 状态
+  optional GetArticleDetailData data = 2;
+}
+
+
+// 用户相关
+message User {
+  required string uid = 1; // 用户id
+  required string name = 2;
+  required string avatar_url = 3;
+  required GenderType gender = 4;
+  required string introduce = 5;
+  required string company = 6;
+  required int32 age = 7;
+}
+
+message UserLoginReq {
+  required string code = 1;
+}
+message UserLoginData {
+  required string token = 1; // 登陆token  需要加入header Authorization
+  required int64 expire_time = 2; // utc时间戳(秒)
+}
+
+message UserLoginResp {
+  required base.Status status = 1; // 状态
+  optional SearchData data = 2;
+}
+
+// 获取用户信息
+message GetUserReq {
+  required string uid = 1; //
+}
+
+message GetUserData {
+  required User user = 1;
+}
+
+message GetUserResp {
+  required base.Status status = 1; // 状态
+  optional GetUserData data = 2;
+}
+
+// 获取up列表
+message GetHotUserListReq {
+  required int32 limit = 1;
+}
+
+message GetHotUserListData {
+  repeated User user = 1;
+}
+
+message GetHotUserListResp {
+  required base.Status status = 1; // 状态
+  optional GetHotUserListData data = 2;
+}
+
+// 社区动态
+message GetCommunityListReq {
+  required PageInfo page_info = 1;
+  required OrderType order_type = 2;
+}
+
+message GetCommunityListData {
+}
+
+message GetCommunityListResp {
+  required base.Status status = 1; // 状态
+  optional GetCommunityListData data = 2;
+}
+
+// oss 获取token
+message OssTokenReq {
+}
+message OssTokenData {
+  required string access_key_id = 1;
+  required string access_key_secret = 2;
+  required string expiration = 3;
+  required string security_token = 4;
+}
+message OssTokenResp {
+  required base.Status status = 1; // 状态
+  optional OssTokenData data = 2;
+}
+

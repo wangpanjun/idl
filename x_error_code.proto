@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+package x_error_code;
+option go_package = "x/error_code";
+
+enum ErrorCode {
+  SUCCESS = 0;
+
+  PARAM_ERROR = 10000001; //参数错误
+  PERMISSION_ERROR = 10000002; //权限拒绝
+  NOT_FOUND_ERROR = 10000003; //
+  INTERNAL_ERROR = 10000004; //服务错误
+  NOT_LOGIN_ERROR = 1000005;
+}

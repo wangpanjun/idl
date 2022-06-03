@@ -1,0 +1,55 @@
+syntax = "proto2";
+
+package x_api;
+
+import "api.proto";
+import "x_common.proto";
+
+
+service MainService {
+  // 搜索
+  rpc Search (x_common.SearchReq) returns (x_common.SearchResp) {
+    option (api.post) = "/api/x/search";
+    option (api.need_login) = "false";
+  }
+  // 详情页面
+  rpc GetArticleDetail (x_common.GetArticleDetailReq) returns (x_common.GetArticleDetailResp) {
+    option (api.post) = "/api/x/article/detail";
+    option (api.need_login) = "false";
+  }
+
+  // 用户登陆/注册
+  rpc UserLogin (x_common.UserLoginReq) returns (x_common.UserLoginResp) {
+    option (api.post) = "/api/x/user/login";
+    option (api.need_login) = "false";
+  }
+
+  // 获取用户信息
+  rpc GetUser (x_common.GetUserReq) returns (x_common.GetUserResp) {
+    option (api.post) = "/api/x/get/user";
+    option (api.need_login) = "false";
+  }
+
+  // 获取up主
+  rpc GetHotUserList (x_common.GetHotUserListReq) returns (x_common.GetHotUserListResp) {
+    option (api.post) = "/api/x/get/host/user";
+    option (api.need_login) = "false";
+  }
+
+  // 获取社区信息
+  rpc GetCommunityList (x_common.GetCommunityListReq) returns (x_common.GetCommunityListResp) {
+    option (api.post) = "/api/x/get/community/list";
+    option (api.need_login) = "false";
+  }
+
+  // 获取oss token
+  rpc OssToken (x_common.OssTokenReq) returns (x_common.OssTokenResp) {
+    option (api.post) = "/api/x/get/oss/token";
+    option (api.need_login) = "true";
+  }
+}
+
+
+
+
+
