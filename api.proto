@@ -3,7 +3,11 @@ syntax = "proto2";
 package api;
 import "google/protobuf/descriptor.proto";
 
+option go_package = "coding/idl/base_api";
+
+
 extend google.protobuf.FieldOptions {
+  optional string raw_body = 10000;
   optional string query = 10001;
   optional string header = 10002;
   optional string cookie = 10003;

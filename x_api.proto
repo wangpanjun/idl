@@ -5,48 +5,93 @@ package x_api;
 import "api.proto";
 import "x_common.proto";
 
+option go_package = "coding/idl/api";
+
 
 service MainService {
   // 搜索
   rpc Search (x_common.SearchReq) returns (x_common.SearchResp) {
-    option (api.post) = "/api/x/search";
+    option (api.post) = "/api/coding/search";
     option (api.need_login) = "false";
   }
   // 详情页面
   rpc GetArticleDetail (x_common.GetArticleDetailReq) returns (x_common.GetArticleDetailResp) {
-    option (api.post) = "/api/x/article/detail";
+    option (api.post) = "/api/coding/article/detail";
     option (api.need_login) = "false";
   }
 
   // 用户登陆/注册
   rpc UserLogin (x_common.UserLoginReq) returns (x_common.UserLoginResp) {
-    option (api.post) = "/api/x/user/login";
+    option (api.post) = "/api/coding/user/login";
     option (api.need_login) = "false";
   }
 
   // 获取用户信息
   rpc GetUser (x_common.GetUserReq) returns (x_common.GetUserResp) {
-    option (api.post) = "/api/x/get/user";
+    option (api.get) = "/api/coding/get/user";
     option (api.need_login) = "false";
   }
 
   // 获取up主
   rpc GetHotUserList (x_common.GetHotUserListReq) returns (x_common.GetHotUserListResp) {
-    option (api.post) = "/api/x/get/host/user";
+    option (api.post) = "/api/coding/get/host/user";
     option (api.need_login) = "false";
   }
 
   // 获取社区信息
   rpc GetCommunityList (x_common.GetCommunityListReq) returns (x_common.GetCommunityListResp) {
-    option (api.post) = "/api/x/get/community/list";
+    option (api.post) = "/api/coding/get/community/list";
     option (api.need_login) = "false";
   }
 
   // 获取oss token
   rpc OssToken (x_common.OssTokenReq) returns (x_common.OssTokenResp) {
-    option (api.post) = "/api/x/get/oss/token";
+    option (api.post) = "/api/coding/get/oss/token";
     option (api.need_login) = "true";
   }
+
+  // 获取用户模块
+  rpc GetUserModule (x_common.GetUserModuleReq) returns (x_common.GetUserModuleResp) {
+    option (api.get) = "/api/coding/get/user/module";
+    option (api.need_login) = "false";
+  }
+
+  // 赞/取消赞
+  rpc Praise (x_common.PraiseReq) returns (x_common.PraiseResp) {
+    option (api.post) = "/api/coding/praises";
+    option (api.need_login) = "true";
+  }
+
+  // 收藏文章
+  rpc Collect (x_common.CollectReq) returns (x_common.CollectResp) {
+    option (api.post) = "/api/coding/collect";
+    option (api.need_login) = "true";
+  }
+
+  // 关注/取消关注
+  rpc FollowUser (x_common.FollowUserReq) returns (x_common.FollowUserResp) {
+    option (api.post) = "/api/coding/follow/user";
+    option (api.need_login) = "true";
+  }
+
+  // 获取评论
+  rpc GetComments (x_common.GetCommentsReq) returns (x_common.GetCommentsResp) {
+    option (api.post) = "/api/coding/comments";
+    option (api.need_login) = "false";
+  }
+
+  // 新增评论
+  rpc CreateComment (x_common.CreateCommentReq) returns (x_common.CreateCommentResp) {
+    option (api.post) = "/api/coding/comments/create";
+    option (api.need_login) = "false";
+  }
+
+  // 更新用户信息
+  rpc UpdateUserBasic (x_common.UpdateUserBasicReq) returns (x_common.UpdateUserBasicResp) {
+    option (api.post) = "/api/coding/user/base/update";
+    option (api.need_login) = "true";
+  }
+
 }
 
 

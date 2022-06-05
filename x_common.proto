@@ -1,18 +1,30 @@
 syntax = "proto2";
 
 package x_common;
-option go_package = "x/common";
+option go_package = "coding/idl/common";
 
 import "base.proto";
 
-// 模块分类
-enum ModuleCategory {
-  Web = 1; // 前端
-  BackEnd = 2; // 后端
-  Algorithm = 3; // 算法
-  Android = 4;
-  IOS = 5;
-  Work = 6; // 职业相关
+enum PraiseCategory {
+  PraiseArticle = 1;
+  PraiseComment = 2;
+  PraiseReply = 3;
+}
+enum UserRelationCategory {
+  Followed = 1; // 关注
+  UnFollowed = 2; // 取消关注
+  Blocked = 3;  // 拉黑
+  UnBlocked = 4;  // 取消拉黑
+}
+
+enum CommentOrderRule {
+  HotDesc = 1; // 热度降序
+  TimeDesc = 2; // 最新
+}
+
+enum SourceType {
+  SourceTypeArticle = 1;
+  SourceTypeCollection = 2;
 }
 
 // feed流作品类型
@@ -35,22 +47,16 @@ enum GenderType {
 }
 
 enum OrderType {
-  TimeAsc = 1;
-  TimeDesc = 2;
-  HotAsc = 3;
-  HotDesc = 4;
+  OrderTypeTimeAsc = 1;
+  OrderTypeTimeDesc = 2;
+  OrderTypeHotAsc = 3;
+  OrderTypeHotDesc = 4;
 }
 
 message PageInfo {
   required int32 offset = 1;
   required int32 limit = 2;
   optional bool has_more = 3;
-}
-
-message BaseUser {
-  required string uid = 1; // 用户id
-  required string name = 2;
-  required string avatar_url = 3;
 }
 
 message CollectionArticle {
@@ -63,25 +69,25 @@ message Collection {
   required string introduce = 2;
   optional string image_url = 3;
   repeated CollectionArticle article_list = 4;
-}
-
-message SearchArticle {
-  required string title = 1;
-  required string introduce = 2;
-  optional string image_url = 3;
+  required string article_id = 5;
+  required string collection_id = 6;
+  required string content = 7;
+  required ChargesType charges_type = 8;
+  required SourceType source_type = 9;
+  required UserModule module = 10;
+  required int64 create_time = 11;
+  required int64 update_time = 12;
+  required string user_id = 13;
 }
 
 message SearchFeed {
-  required SearchFeedType feed_type = 1;
-  required BaseUser author = 2;
-  optional Collection collection = 3;
-  optional SearchArticle article = 4;
-  required ChargesType charges_type = 5; // 付费类型
+  required User user = 1;
+  required ArticleDetail article = 2;
 }
 
 // 搜索feed流
 message SearchReq {
-  required ModuleCategory module_category = 1;
+  required int32 module_category = 1;
   optional string q = 2;
   required PageInfo page_info = 3;
 }
@@ -102,6 +108,19 @@ message ArticleDetail {
   required string collection_id = 2;
   required string content = 3;
   required string image_url = 4;
+  required string user_id = 5;
+  required string title = 6;
+  required string introduce = 7;
+  required ChargesType charges_type = 8;
+  required SourceType source_type = 9;
+  required UserModule module = 10;
+  required int64 create_time = 11;
+  required int64 update_time = 12;
+  required int64 praise_num = 13;
+  required int64 collect_num = 14;
+  required int64 comment_num = 15;
+  required bool is_praise = 16;
+  required bool is_collect = 17;
 }
 
 // 详情页面
@@ -111,9 +130,8 @@ message GetArticleDetailReq {
 }
 
 message GetArticleDetailData {
-  optional Collection collection = 1;
-  optional ArticleDetail article = 2 ;
-  required BaseUser user = 3;
+  optional ArticleDetail article = 1 ;
+  required User user = 2;
 }
 
 message GetArticleDetailResp {
@@ -131,6 +149,7 @@ message User {
   required string introduce = 5;
   required string company = 6;
   required int32 age = 7;
+  required bool is_followed = 8; // 是否已经关注
 }
 
 message UserLoginReq {
@@ -139,11 +158,12 @@ message UserLoginReq {
 message UserLoginData {
   required string token = 1; // 登陆token  需要加入header Authorization
   required int64 expire_time = 2; // utc时间戳(秒)
+  required User user = 3;
 }
 
 message UserLoginResp {
   required base.Status status = 1; // 状态
-  optional SearchData data = 2;
+  optional UserLoginData data = 2;
 }
 
 // 获取用户信息
@@ -202,3 +222,155 @@ message OssTokenResp {
   optional OssTokenData data = 2;
 }
 
+
+// 模块
+message UserModule {
+  required int64 id = 1;
+  required string name = 2;
+  required bool is_select = 3;
+  required string introduce = 4;
+}
+
+message GetUserModuleReq {
+}
+message GetUserModuleData {
+  repeated UserModule user_module_list = 1;
+}
+message GetUserModuleResp {
+  required base.Status status = 1; // 状态
+  optional GetUserModuleData data = 2;
+}
+
+// 点赞/取消点赞
+message PraiseReq {
+   required string object_id = 1; // 文章id
+   required bool state = 2; // 赞/取消赞
+   required PraiseCategory category = 3;
+}
+
+message PraiseResp {
+  required base.Status status = 1; // 状态
+}
+
+// 收藏
+message CollectReq {
+  required string article_id = 1;
+  required bool state = 2;
+}
+
+message CollectResp {
+  required base.Status status = 1; // 状态
+}
+
+// 关注/取消关注
+message FollowUserReq {
+  required string to_user_id = 1;
+  required UserRelationCategory category = 2;
+}
+
+message FollowUserResp {
+  required base.Status status = 1; // 状态
+}
+
+// 评论
+message GetCommentsReq {
+  required string article_id  = 1;
+  required PageInfo page_info = 2;
+  required CommentOrderRule order_rule = 3;
+}
+
+message Comment {
+    required string comment_id = 1;
+    required string content = 2;
+    required string article_id = 3;
+    required int64 create_time = 4;
+    required int32 praise_num = 5;
+    required int32 reply_count = 6;
+    required string user_id = 7;
+    required bool is_praised = 8;
+}
+
+message GetCommentsData {
+  repeated Comment comments = 1;
+  required PageInfo page_info = 2;
+  repeated User user_list = 3;
+}
+
+message GetCommentsResp {
+  required base.Status status = 1; // 状态
+  required GetCommentsData data = 2;
+}
+
+// 新增评论
+message CreateCommentReq {
+  required string article_id = 1;
+  required string content = 2;
+
+}
+message CreateCommentData {
+  required Comment comment = 1;
+  required User user = 2;
+}
+message CreateCommentResp {
+  required base.Status status = 1; // 状态
+  required CreateCommentData data = 2;
+}
+
+// 回复相关
+message Reply {
+    required string reply_id = 1;
+    required string to_article_id = 2;
+    required string to_comment_id = 3;
+    required string to_reply_id = 4;
+    required string content = 5;
+    required string user_id = 6;
+    required string to_user_id = 7;
+    required int64 create_time = 8;
+    required bool to_reply_delete = 9;
+    required bool is_praised = 10;
+    required int32 praise_num = 11;
+    required string quote = 12;
+}
+
+// 回复
+message CreateReplyReq {
+  required string to_article_id = 1;
+  required string to_comment_id = 2;
+  required string to_reply_id = 3;
+  required string to_reply_user_id = 4;
+  required string content = 5;
+
+}
+
+message CreateReplyData {
+  required Reply reply = 1;
+}
+
+message CreateReplyResp {
+  required base.Status status = 1; // 状态
+  required CreateReplyData data = 2;
+}
+
+// 删除评论/回复
+message DeleteReplyReq {
+  required string comment_id = 1;
+  required string reply_id = 2;
+}
+
+message DeleteReplyResp {
+  required base.Status status = 1; // 状态
+}
+
+message UpdateUserBasicReq {
+  optional string username = 1;
+  optional GenderType gender = 2;
+  optional string introduce = 3;
+  optional string avatar_url = 4;
+}
+message UpdateUserBasicData {
+}
+
+message UpdateUserBasicResp {
+  required base.Status status = 1; // 状态
+  optional UpdateUserBasicData data = 2;
+}

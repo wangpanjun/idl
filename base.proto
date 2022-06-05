@@ -1,7 +1,7 @@
 syntax = "proto2";
 
 package base;
-option go_package = "x/base";
+option go_package = "coding/idl/base";
 
 message Status {
   required int64 code = 1; //
