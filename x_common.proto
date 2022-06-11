@@ -370,3 +370,22 @@ message UpdateUserBasicResp {
   required base.Status status = 1; // 状态
   optional UpdateUserBasicData data = 2;
 }
+
+// 发表/更新文章
+message SubmitArticleReq {
+  optional string article_id = 1;
+  required string title = 2;
+  required bool is_public = 3; // 暂存/发布
+  required string content_md = 4;    //
+  required string content_html = 5;
+  required int64 module_id = 6;
+}
+
+message SubmitArticleData {
+  required ArticleDetail article = 1;
+}
+
+message SubmitArticleResp {
+  required base.Status status = 1; // 状态
+  optional SubmitArticleData data = 2;
+}

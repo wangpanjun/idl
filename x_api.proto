@@ -92,6 +92,11 @@ service MainService {
     option (api.need_login) = "true";
   }
 
+  // 更新用户信息
+  rpc SubmitArticle (x_common.SubmitArticleReq) returns (x_common.SubmitArticleResp) {
+    option (api.post) = "/api/coding/article/submit";
+    option (api.need_login) = "true";
+  }
 }
 
 

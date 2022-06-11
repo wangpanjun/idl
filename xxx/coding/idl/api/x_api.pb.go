@@ -27,7 +27,7 @@ var file_x_api_proto_rawDesc = []byte{
 	0x0a, 0x0b, 0x78, 0x5f, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x78,
 	0x5f, 0x61, 0x70, 0x69, 0x1a, 0x09, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
 	0x0e, 0x78, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32,
-	0xd2, 0x0b, 0x0a, 0x0b, 0x4d, 0x61, 0x69, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
+	0xc4, 0x0c, 0x0a, 0x0b, 0x4d, 0x61, 0x69, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
 	0x54, 0x0a, 0x06, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x12, 0x13, 0x2e, 0x78, 0x5f, 0x63, 0x6f,
 	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x65, 0x71, 0x1a, 0x14,
 	0x2e, 0x78, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68,
@@ -120,8 +120,15 @@ var file_x_api_proto_rawDesc = []byte{
 	0x72, 0x42, 0x61, 0x73, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x22, 0x28, 0x92, 0xe2, 0x09, 0x1c,
 	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x64, 0x69, 0x6e, 0x67, 0x2f, 0x75, 0x73, 0x65, 0x72,
 	0x2f, 0x62, 0x61, 0x73, 0x65, 0x2f, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0xd2, 0xe2, 0x09, 0x04,
-	0x74, 0x72, 0x75, 0x65, 0x42, 0x10, 0x5a, 0x0e, 0x63, 0x6f, 0x64, 0x69, 0x6e, 0x67, 0x2f, 0x69,
-	0x64, 0x6c, 0x2f, 0x61, 0x70, 0x69,
+	0x74, 0x72, 0x75, 0x65, 0x12, 0x70, 0x0a, 0x0d, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x41, 0x72,
+	0x74, 0x69, 0x63, 0x6c, 0x65, 0x12, 0x1a, 0x2e, 0x78, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
+	0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x65,
+	0x71, 0x1a, 0x1b, 0x2e, 0x78, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x53, 0x75, 0x62,
+	0x6d, 0x69, 0x74, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x22, 0x26,
+	0x92, 0xe2, 0x09, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x64, 0x69, 0x6e, 0x67, 0x2f,
+	0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x2f, 0x73, 0x75, 0x62, 0x6d, 0x69, 0x74, 0xd2, 0xe2,
+	0x09, 0x04, 0x74, 0x72, 0x75, 0x65, 0x42, 0x10, 0x5a, 0x0e, 0x63, 0x6f, 0x64, 0x69, 0x6e, 0x67,
+	0x2f, 0x69, 0x64, 0x6c, 0x2f, 0x61, 0x70, 0x69,
 }
 
 var file_x_api_proto_goTypes = []interface{}{
@@ -139,20 +146,22 @@ var file_x_api_proto_goTypes = []interface{}{
 	(*common.GetCommentsReq)(nil),       // 11: x_common.GetCommentsReq
 	(*common.CreateCommentReq)(nil),     // 12: x_common.CreateCommentReq
 	(*common.UpdateUserBasicReq)(nil),   // 13: x_common.UpdateUserBasicReq
-	(*common.SearchResp)(nil),           // 14: x_common.SearchResp
-	(*common.GetArticleDetailResp)(nil), // 15: x_common.GetArticleDetailResp
-	(*common.UserLoginResp)(nil),        // 16: x_common.UserLoginResp
-	(*common.GetUserResp)(nil),          // 17: x_common.GetUserResp
-	(*common.GetHotUserListResp)(nil),   // 18: x_common.GetHotUserListResp
-	(*common.GetCommunityListResp)(nil), // 19: x_common.GetCommunityListResp
-	(*common.OssTokenResp)(nil),         // 20: x_common.OssTokenResp
-	(*common.GetUserModuleResp)(nil),    // 21: x_common.GetUserModuleResp
-	(*common.PraiseResp)(nil),           // 22: x_common.PraiseResp
-	(*common.CollectResp)(nil),          // 23: x_common.CollectResp
-	(*common.FollowUserResp)(nil),       // 24: x_common.FollowUserResp
-	(*common.GetCommentsResp)(nil),      // 25: x_common.GetCommentsResp
-	(*common.CreateCommentResp)(nil),    // 26: x_common.CreateCommentResp
-	(*common.UpdateUserBasicResp)(nil),  // 27: x_common.UpdateUserBasicResp
+	(*common.SubmitArticleReq)(nil),     // 14: x_common.SubmitArticleReq
+	(*common.SearchResp)(nil),           // 15: x_common.SearchResp
+	(*common.GetArticleDetailResp)(nil), // 16: x_common.GetArticleDetailResp
+	(*common.UserLoginResp)(nil),        // 17: x_common.UserLoginResp
+	(*common.GetUserResp)(nil),          // 18: x_common.GetUserResp
+	(*common.GetHotUserListResp)(nil),   // 19: x_common.GetHotUserListResp
+	(*common.GetCommunityListResp)(nil), // 20: x_common.GetCommunityListResp
+	(*common.OssTokenResp)(nil),         // 21: x_common.OssTokenResp
+	(*common.GetUserModuleResp)(nil),    // 22: x_common.GetUserModuleResp
+	(*common.PraiseResp)(nil),           // 23: x_common.PraiseResp
+	(*common.CollectResp)(nil),          // 24: x_common.CollectResp
+	(*common.FollowUserResp)(nil),       // 25: x_common.FollowUserResp
+	(*common.GetCommentsResp)(nil),      // 26: x_common.GetCommentsResp
+	(*common.CreateCommentResp)(nil),    // 27: x_common.CreateCommentResp
+	(*common.UpdateUserBasicResp)(nil),  // 28: x_common.UpdateUserBasicResp
+	(*common.SubmitArticleResp)(nil),    // 29: x_common.SubmitArticleResp
 }
 var file_x_api_proto_depIdxs = []int32{
 	0,  // 0: x_api.MainService.Search:input_type -> x_common.SearchReq
@@ -169,22 +178,24 @@ var file_x_api_proto_depIdxs = []int32{
 	11, // 11: x_api.MainService.GetComments:input_type -> x_common.GetCommentsReq
 	12, // 12: x_api.MainService.CreateComment:input_type -> x_common.CreateCommentReq
 	13, // 13: x_api.MainService.UpdateUserBasic:input_type -> x_common.UpdateUserBasicReq
-	14, // 14: x_api.MainService.Search:output_type -> x_common.SearchResp
-	15, // 15: x_api.MainService.GetArticleDetail:output_type -> x_common.GetArticleDetailResp
-	16, // 16: x_api.MainService.UserLogin:output_type -> x_common.UserLoginResp
-	17, // 17: x_api.MainService.GetUser:output_type -> x_common.GetUserResp
-	18, // 18: x_api.MainService.GetHotUserList:output_type -> x_common.GetHotUserListResp
-	19, // 19: x_api.MainService.GetCommunityList:output_type -> x_common.GetCommunityListResp
-	20, // 20: x_api.MainService.OssToken:output_type -> x_common.OssTokenResp
-	21, // 21: x_api.MainService.GetUserModule:output_type -> x_common.GetUserModuleResp
-	22, // 22: x_api.MainService.Praise:output_type -> x_common.PraiseResp
-	23, // 23: x_api.MainService.Collect:output_type -> x_common.CollectResp
-	24, // 24: x_api.MainService.FollowUser:output_type -> x_common.FollowUserResp
-	25, // 25: x_api.MainService.GetComments:output_type -> x_common.GetCommentsResp
-	26, // 26: x_api.MainService.CreateComment:output_type -> x_common.CreateCommentResp
-	27, // 27: x_api.MainService.UpdateUserBasic:output_type -> x_common.UpdateUserBasicResp
-	14, // [14:28] is the sub-list for method output_type
-	0,  // [0:14] is the sub-list for method input_type
+	14, // 14: x_api.MainService.SubmitArticle:input_type -> x_common.SubmitArticleReq
+	15, // 15: x_api.MainService.Search:output_type -> x_common.SearchResp
+	16, // 16: x_api.MainService.GetArticleDetail:output_type -> x_common.GetArticleDetailResp
+	17, // 17: x_api.MainService.UserLogin:output_type -> x_common.UserLoginResp
+	18, // 18: x_api.MainService.GetUser:output_type -> x_common.GetUserResp
+	19, // 19: x_api.MainService.GetHotUserList:output_type -> x_common.GetHotUserListResp
+	20, // 20: x_api.MainService.GetCommunityList:output_type -> x_common.GetCommunityListResp
+	21, // 21: x_api.MainService.OssToken:output_type -> x_common.OssTokenResp
+	22, // 22: x_api.MainService.GetUserModule:output_type -> x_common.GetUserModuleResp
+	23, // 23: x_api.MainService.Praise:output_type -> x_common.PraiseResp
+	24, // 24: x_api.MainService.Collect:output_type -> x_common.CollectResp
+	25, // 25: x_api.MainService.FollowUser:output_type -> x_common.FollowUserResp
+	26, // 26: x_api.MainService.GetComments:output_type -> x_common.GetCommentsResp
+	27, // 27: x_api.MainService.CreateComment:output_type -> x_common.CreateCommentResp
+	28, // 28: x_api.MainService.UpdateUserBasic:output_type -> x_common.UpdateUserBasicResp
+	29, // 29: x_api.MainService.SubmitArticle:output_type -> x_common.SubmitArticleResp
+	15, // [15:30] is the sub-list for method output_type
+	0,  // [0:15] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
