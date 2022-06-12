@@ -102,7 +102,7 @@ message SearchResp {
 message ArticleDetail {
   required string article_id = 1;
   required string collection_id = 2;
-  required string content = 3;
+  required string content_md = 3;
   required string image_url = 4;
   required string user_id = 5;
   required string title = 6;
@@ -117,6 +117,8 @@ message ArticleDetail {
   required int64 comment_num = 15;
   required bool is_praise = 16;
   required bool is_collect = 17;
+  required bool is_public = 18;
+  required string content_html = 19;
 }
 
 // 详情页面
@@ -379,6 +381,10 @@ message SubmitArticleReq {
   required string content_md = 4;    //
   required string content_html = 5;
   required int64 module_id = 6;
+  required string introduce = 7; // 简介
+  required string  image_url = 8; // 封面图
+  required ChargesType charges_type = 9; // 付费类型
+  required SourceType source_type = 10; // 资源类型
 }
 
 message SubmitArticleData {
