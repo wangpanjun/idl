@@ -385,6 +385,7 @@ message SubmitArticleReq {
   required string  image_url = 8; // 封面图
   required ChargesType charges_type = 9; // 付费类型
   required SourceType source_type = 10; // 资源类型
+  required string collection_id = 11; // 所属集合id
 }
 
 message SubmitArticleData {
